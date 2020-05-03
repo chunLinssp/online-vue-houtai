@@ -2,7 +2,7 @@
   <el-container class="Mycontainer">
     <el-aside class="myAside" width="240px">
     <el-menu :default-openeds="['1', '3']">
-      <el-submenu :index="index" v-for="(item,index) in menuMap" :key="index">
+      <el-submenu :index="'\''+index + '\''" v-for="(item,index) in menuMap" :key="index">
         <template slot="title"><i class="el-icon-message"></i>{{ item.mainMenu }}</template>
         <el-menu-item-group v-for="(it,order) in item.children" :key="order">
           <el-menu-item @click="tableView(it.childrenMenu,it.url)">{{it.childrenMenu}} {{ it.url }}</el-menu-item>
@@ -142,6 +142,7 @@ export default {
   .view-card{
     width: 100%;
     height: 80%;
+    overflow:auto
   }
    
 .el-menu-item.is-active {

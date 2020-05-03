@@ -7,18 +7,18 @@
 
     </div>
     <div class="header-info">
-        <el-dropdown>
+        <el-dropdown class="downComponent">
             <span class="el-dropdown-link">
             下拉菜单
             <i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>黄金糕</el-dropdown-item>
-                <el-dropdown-item>狮子头</el-dropdown-item>
-                <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-                <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
-            </el-dropdown-menu>
+            </span>
+            <template v-if="account != ''">
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>
+                      <a href="javascript:;" @click="Tologout">注销
+                      </a></el-dropdown-item>
+                </el-dropdown-menu>
+            </template>
         </el-dropdown>
     </div>
 
@@ -27,9 +27,29 @@
 </template>
 
 <script>
+import {getUserMessage} from '@/request/token'
 export default {
   data() {
-    return {};
+    return {
+    };
+  },
+  created() {
+    console.log('--------------------------');
+    console.log(JSON.parse(getUserMessage()).name);
+    
+  },
+  computed:{
+      account:function(){
+        return JSON.parse(getUserMessage()).account;
+      }
+  },
+  methods:{
+    Tologout() {
+      let that = this;
+      this.$store.dispatch('logout').then(() =>{
+        that.$router.push('/admin/login');
+      })
+    }
   }
  
 };
@@ -44,7 +64,6 @@ export default {
 .header{
     width: 100%;
     height: 70px;
-    background-color: burlywood;
 }
 
 .el-dropdown-link {
@@ -77,10 +96,12 @@ font-size: 12px;
 .header-info{
     width: 200px;
     height: 100%;
-    background-color: slateblue;
     float: right;
 }
 
+.downComponent{
+  margin-top:25px;
+}
 
 
 

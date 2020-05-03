@@ -99,7 +99,7 @@ export default {
             that.$store.dispatch('login',that.userForm).then(res =>{
               that.$router.push('/');
               alert('ok');
-              console.log(that.$store.state.token)
+              console.log(that.$store.state.account)
             }).catch(error =>{
               that.$message({
                 message:error,

@@ -26,5 +26,10 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  computed:{
+    USER_ACCOUNT: function(){
+      return store.state.account;
+    }
+  }
 })

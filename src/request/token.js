@@ -9,3 +9,12 @@ export function getToken() {
   export function removeToken() {
     return localStorage.removeItem('token')
   }
+
+  export function setStoreData(data) {
+    sessionStorage.userMessag = data;
+  }
+  export function getUserMessage() {
+    return sessionStorage.userMessag;
+  }
+
+
